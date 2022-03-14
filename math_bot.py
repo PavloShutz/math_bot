@@ -1,13 +1,19 @@
 from telegram.ext import Filters, MessageHandler, CommandHandler, Updater
+from pathlib import Path
 
-TOKEN = '5211797765:AAFkB8cYOqRDAPzlPa82hkXsJB4Hv0Y7UUU'
+file = Path.cwd() / 'token.txt'
+data = open(file, 'r')
+info = data.read()
+data.close()
+TOKEN = info
 
 updater = Updater(TOKEN)
 
 
 def start(update, context):
     chat = update.effective_chat
-    context.bot.send_message(chat_id=chat.id, text='Hello! I\'m math bot. Type \help for more info')
+    context.bot.send_message(chat_id=chat.id,
+                             text='Hello! I\'m math bot. Type \help for more info')
 
 
 def helper(update, context):
